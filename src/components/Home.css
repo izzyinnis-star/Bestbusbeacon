@@ -1,0 +1,88 @@
+.home-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-header {
+  text-align: center;
+  padding: var(--spacing-xl) 0;
+  border-bottom: 3px solid var(--color-primary);
+  margin-bottom: var(--spacing-xl);
+}
+
+.app-title {
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+body.high-contrast .app-title {
+  color: var(--color-hc-primary);
+}
+
+.app-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+}
+
+body.high-contrast .app-subtitle {
+  color: var(--color-hc-text);
+}
+
+.home-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.welcome-section {
+  background-color: var(--color-bg-secondary);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius);
+  border: 2px solid var(--color-border);
+  text-align: center;
+}
+
+body.high-contrast .welcome-section {
+  background-color: var(--color-hc-bg);
+  border-color: var(--color-hc-border);
+}
+
+.welcome-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-md);
+}
+
+.accessibility-message {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+
+body.high-contrast .accessibility-message {
+  color: var(--color-hc-text);
+}
+
+.home-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) 0;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .home-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+  }
+}

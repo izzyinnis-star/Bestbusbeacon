@@ -1,0 +1,127 @@
+:root {
+  /* Color Palette - High Contrast */
+  --color-primary: #0066cc;
+  --color-primary-dark: #004499;
+  --color-secondary: #ff6600;
+  --color-success: #28a745;
+  --color-error: #dc3545;
+  --color-warning: #ffc107;
+  
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f5f5f5;
+  --color-text: #000000;
+  --color-text-secondary: #333333;
+  --color-border: #cccccc;
+  
+  /* High Contrast Mode Colors */
+  --color-hc-bg: #000000;
+  --color-hc-text: #ffffff;
+  --color-hc-primary: #ffff00;
+  --color-hc-border: #ffffff;
+  
+  /* Spacing */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+  
+  /* Typography */
+  --font-size-base: 18px;
+  --font-size-lg: 24px;
+  --font-size-xl: 32px;
+  --font-size-xxl: 40px;
+  
+  /* Border Radius */
+  --border-radius: 8px;
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+/* High Contrast Mode */
+body.high-contrast {
+  background-color: var(--color-hc-bg);
+  color: var(--color-hc-text);
+}
+
+body.high-contrast .button,
+body.high-contrast button {
+  background-color: var(--color-hc-bg);
+  color: var(--color-hc-text);
+  border: 3px solid var(--color-hc-text);
+}
+
+body.high-contrast .button:hover,
+body.high-contrast button:hover {
+  background-color: var(--color-hc-text);
+  color: var(--color-hc-bg);
+}
+
+body.high-contrast .toggle-switch {
+  border: 3px solid var(--color-hc-text);
+}
+
+body.high-contrast .toggle-switch.active {
+  background-color: var(--color-hc-primary);
+  border-color: var(--color-hc-primary);
+}
+
+/* Focus Styles - Critical for Accessibility */
+*:focus {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+body.high-contrast *:focus {
+  outline: 3px solid var(--color-hc-primary);
+  outline-offset: 2px;
+}
+
+/* Screen Reader Only Content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Skip Link for Keyboard Navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-primary);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
+}
