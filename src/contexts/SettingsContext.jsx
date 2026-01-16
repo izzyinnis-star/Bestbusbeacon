@@ -17,6 +17,9 @@ export const SettingsProvider = ({ children }) => {
     const savedSettings = localStorage.getItem('appSettings');
     return savedSettings ? JSON.parse(savedSettings) : DEFAULT_SETTINGS;
   });
+  
+  // Create a single AudioContext instance to reuse
+  const audioContextRef = React.useRef(null);
 
   // Persist settings to localStorage whenever they change
   useEffect(() => {
@@ -56,29 +59,38 @@ export const SettingsProvider = ({ children }) => {
   };
 
   const playFeedbackSound = (type) => {
-    // Create audio context for sound feedback
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
+    try {
+      // Create or reuse audio context for sound feedback
+      if (!audioContextRef.current) {
+        audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      
+      const audioContext = audioContextRef.current;
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
 
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
 
-    // Different frequencies for different feedback types
-    if (type === 'success') {
-      oscillator.frequency.value = 800;
-    } else if (type === 'error') {
-      oscillator.frequency.value = 400;
-    } else {
-      oscillator.frequency.value = 600;
+      // Different frequencies for different feedback types
+      if (type === 'success') {
+        oscillator.frequency.value = 800;
+      } else if (type === 'error') {
+        oscillator.frequency.value = 400;
+      } else {
+        oscillator.frequency.value = 600;
+      }
+
+      oscillator.type = 'sine';
+      gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.1);
+    } catch (error) {
+      // Handle cases where audio might be blocked by browser policies
+      console.warn('Audio feedback failed:', error);
     }
-
-    oscillator.type = 'sine';
-    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.1);
   };
 
   return (

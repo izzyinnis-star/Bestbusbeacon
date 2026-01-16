@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSettings } from '../contexts/SettingsContext';
 import './Toggle.css';
 
@@ -9,6 +10,7 @@ const Toggle = ({
   ariaLabel,
   id 
 }) => {
+  const { t } = useTranslation();
   const { triggerFeedback } = useSettings();
 
   const handleChange = (e) => {
@@ -42,7 +44,7 @@ const Toggle = ({
           <span className="toggle-slider"></span>
         </label>
         <span className="toggle-status" aria-live="polite">
-          {checked ? 'On' : 'Off'}
+          {checked ? t('on') : t('off')}
         </span>
       </div>
     </div>

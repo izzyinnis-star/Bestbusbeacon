@@ -18,5 +18,7 @@
   "about": "About",
   "accessibility": "Accessibility",
   "accessibilityMessage": "This app is designed with accessibility in mind. Large buttons, high contrast, and clear labels throughout.",
-  "languageChanged": "Language changed successfully"
+  "languageChanged": "Language changed successfully",
+  "on": "On",
+  "off": "Off"
 }

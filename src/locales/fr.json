@@ -18,5 +18,7 @@
   "about": "À Propos",
   "accessibility": "Accessibilité",
   "accessibilityMessage": "Cette application est conçue avec l'accessibilité à l'esprit. Grands boutons, contraste élevé et étiquettes claires partout.",
-  "languageChanged": "Langue changée avec succès"
+  "languageChanged": "Langue changée avec succès",
+  "on": "Activé",
+  "off": "Désactivé"
 }
