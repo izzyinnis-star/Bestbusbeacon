@@ -3,7 +3,7 @@
     "name": "BusBeacon",
     "version": "1.0.0",
     "build": "2026.01.16",
-    "description": "Signal bus drivers with accessibility and multilingual support",
+    "description": "Signal bus drivers with flashing visual cues - Pick Me Up or Not This Bus",
     "author": "BusBeacon Team",
     "license": "MIT",
     "repository": "https://github.com/izzyinnis-star/Bestbusbeacon"
@@ -25,88 +25,63 @@
     }
   },
   "permissions": {
-    "location": {
+    "vibration": {
       "required": false,
-      "description": "Used to detect nearby bus stops",
-      "ios": "NSLocationWhenInUseUsageDescription",
-      "android": "ACCESS_FINE_LOCATION"
-    },
-    "notifications": {
-      "required": false,
-      "description": "Send notifications when beacon is active",
-      "ios": "NSUserNotificationsUsageDescription",
-      "android": "POST_NOTIFICATIONS"
-    },
-    "camera": {
-      "required": false,
-      "description": "Use flash as additional beacon (optional)",
-      "ios": "NSCameraUsageDescription",
-      "android": "CAMERA"
+      "description": "Optional haptic feedback during flashing (Strong Signal Mode)",
+      "android": "VIBRATE"
     }
   },
   "features": {
-    "beacon": {
-      "defaultDuration": 300,
-      "maxDuration": 600,
+    "pickMeUp": {
       "flashInterval": 500,
-      "autostopBatteryThreshold": 10,
-      "warningBatteryThreshold": 20,
       "colors": {
-        "primary": "#FFEB3B",
-        "secondary": "#FFFFFF",
-        "highContrastPrimary": "#000000",
-        "highContrastSecondary": "#FFFFFF"
+        "primary": "#4CAF50",
+        "secondary": "#FFFFFF"
+      },
+      "textCycle": ["PICK", "ME", "UP"]
+    },
+    "notThisBus": {
+      "flashInterval": 500,
+      "colors": {
+        "primary": "#F44336",
+        "secondary": "#FFFFFF"
+      },
+      "text": "NOT THIS BUS"
+    },
+    "strongSignalMode": {
+      "fontSizeBoost": 8,
+      "fontWeight": "Bold",
+      "vibrationEnabled": true
+    },
+    "fontSizes": {
+      "portrait": {
+        "normal": 48,
+        "strong": 56
+      },
+      "landscape": {
+        "normal": 64,
+        "strong": 72
       }
-    },
-    "location": {
-      "updateInterval": 30,
-      "accuracy": "high",
-      "nearbyStopsRadius": 0.5
-    },
-    "accessibility": {
-      "screenReader": true,
-      "highContrast": true,
-      "adjustableTextSize": true,
-      "minimumTouchTarget": 44,
-      "hapticFeedback": true
-    },
-    "multilingual": {
-      "defaultLanguage": "en",
-      "autoDetect": true,
-      "supportedLanguages": [
-        "en",
-        "es",
-        "fr",
-        "zh",
-        "ar"
-      ]
     }
   },
   "colors": {
-    "primary": "#2196F3",
-    "primaryDark": "#1976D2",
-    "primaryLight": "#BBDEFB",
-    "accent": "#FFC107",
-    "beaconYellow": "#FFEB3B",
-    "beaconOrange": "#FF9800",
-    "error": "#F44336",
-    "success": "#4CAF50",
-    "textPrimary": "#212121",
-    "textSecondary": "#757575",
-    "background": "#FFFFFF",
-    "backgroundDark": "#F5F5F5"
+    "green": "#4CAF50",
+    "red": "#F44336",
+    "white": "#FFFFFF",
+    "gray": "#9E9E9E",
+    "blue": "#2196F3"
   },
   "typography": {
     "fontFamily": "System",
     "sizes": {
-      "headingLarge": 32,
-      "headingMedium": 24,
-      "headingSmall": 20,
-      "body": 16,
-      "bodyLarge": 18,
-      "button": 18,
-      "caption": 14,
-      "timer": 32
+      "title": 32,
+      "button": 24,
+      "settings": 20,
+      "settingsLabel": 18,
+      "flashingPortrait": 48,
+      "flashingPortraitStrong": 56,
+      "flashingLandscape": 64,
+      "flashingLandscapeStrong": 72
     },
     "weights": {
       "bold": "bold",
@@ -116,47 +91,84 @@
   "storage": {
     "localDB": {
       "keys": {
-        "language": "app.language",
-        "visualBeacon": "beacon.visual",
-        "audioAlert": "beacon.audio",
-        "vibration": "beacon.vibration",
-        "flashLight": "beacon.flashLight",
-        "highContrast": "accessibility.highContrast",
-        "textSize": "accessibility.textSize",
-        "notifications": "notifications.enabled",
-        "notificationSound": "notifications.sound"
+        "busNumber": "busNumber",
+        "strongSignalMode": "strongSignalMode",
+        "soundEnabled": "soundEnabled"
       }
     }
   },
   "screens": [
     {
-      "name": "HomeScreen",
+      "name": "MainScreen",
       "route": "/",
-      "description": "Main landing screen with beacon activation"
+      "description": "Main landing screen with three action buttons"
     },
     {
-      "name": "BeaconActiveScreen",
-      "route": "/beacon",
-      "description": "Full-screen visual beacon"
+      "name": "PickMeUpScreen",
+      "route": "/pick-me-up",
+      "description": "Green flashing signal with PICK → ME → UP animation"
+    },
+    {
+      "name": "NotThisBusScreen",
+      "route": "/not-this-bus",
+      "description": "Red flashing signal with NOT THIS BUS text"
     },
     {
       "name": "SettingsScreen",
       "route": "/settings",
-      "description": "App configuration and preferences"
+      "description": "Settings for bus number and strong signal mode"
     },
     {
-      "name": "HelpScreen",
-      "route": "/help",
-      "description": "User guidance and support"
+      "name": "StoppedScreen",
+      "route": "/stopped",
+      "description": "Optional confirmation screen after stopping signal",
+      "optional": true
     }
   ],
+  "globalVariables": {
+    "busNumber": {
+      "type": "string",
+      "default": "",
+      "description": "User's custom bus number"
+    },
+    "strongSignalMode": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enhanced visibility mode toggle"
+    },
+    "isFlashing": {
+      "type": "boolean",
+      "default": false,
+      "description": "Current flashing state"
+    },
+    "flashStep": {
+      "type": "number",
+      "default": 0,
+      "description": "Animation step for PICK→ME→UP (0, 1, or 2)"
+    },
+    "isGreen": {
+      "type": "boolean",
+      "default": true,
+      "description": "Color state for alternating backgrounds"
+    },
+    "savedBrightness": {
+      "type": "number",
+      "default": 0.5,
+      "description": "Original brightness level before boost"
+    },
+    "soundEnabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Sound feedback toggle (optional feature)"
+    }
+  },
   "assets": {
     "sounds": [
       {
-        "name": "beacon_alert.mp3",
-        "description": "Audio alert for beacon",
-        "duration": 2000,
-        "loop": true
+        "name": "beep.mp3",
+        "description": "Short beep sound for flash feedback",
+        "duration": 200,
+        "loop": false
       }
     ],
     "images": [
@@ -169,6 +181,12 @@
         "name": "splash_screen.png",
         "size": "2048x2048",
         "description": "Splash screen image"
+      },
+      {
+        "name": "bus_icon.png",
+        "size": "120x120",
+        "description": "Optional bus icon for main screen",
+        "optional": true
       }
     ]
   },

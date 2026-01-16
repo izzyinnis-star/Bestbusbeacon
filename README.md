@@ -1,101 +1,122 @@
 # BusBeacon
 
-A Thunkable mobile app that helps bus riders signal drivers that they are waiting, with comprehensive accessibility and multilingual support.
+A Thunkable mobile app that helps bus riders signal drivers with clear, flashing visual signals for "Pick Me Up" or "Not This Bus" messages.
 
 ## Overview
 
-BusBeacon is designed to improve communication between bus riders and drivers, especially in situations where visibility is limited or riders have accessibility needs. The app allows users to send a visual and/or audio beacon signal to indicate their presence at a bus stop.
+BusBeacon is designed to improve communication between bus riders and drivers. The app provides full-screen flashing signals that are highly visible from a distance, helping drivers identify waiting passengers and their intentions. Riders can signal "Pick Me Up" (green) or "Not This Bus" (red), with optional personalization using their bus number.
 
 ## Features
 
 ### Core Functionality
-- **Signal Beacon**: Large, easy-to-press button to activate beacon mode
-- **Visual Beacon**: Bright, flashing screen with high contrast colors
-- **Audio Beacon**: Optional sound alerts for drivers
-- **Location Awareness**: Shows nearby bus routes and stops
-- **Real-time Status**: Displays active beacon status
+- **Pick Me Up Signal**: Full-screen green flashing signal with animated text (PICK → ME → UP)
+- **Not This Bus Signal**: Full-screen red flashing signal to indicate you're waiting for a different bus
+- **Bus Number Display**: Optional personalization - display your specific bus number during flashing
+- **Strong Signal Mode**: Enhanced visibility mode with larger fonts and bolder text
+- **Tap to Stop**: Tap anywhere on the flashing screen to stop the signal
+- **Landscape Support**: Font sizes automatically adjust for landscape orientation
 
 ### Accessibility Features
-- **Screen Reader Support**: Full VoiceOver/TalkBack compatibility
-- **High Contrast Mode**: Enhanced visibility for users with visual impairments
-- **Large Touch Targets**: All buttons meet WCAG 2.1 guidelines (minimum 44x44 points)
-- **Voice Commands**: Hands-free beacon activation
-- **Haptic Feedback**: Vibration confirmation for actions
-- **Adjustable Text Size**: Scalable fonts for readability
+- **High Contrast Flashing**: Alternating background and text colors for maximum visibility
+- **Large Text Display**: Large fonts (48-72px) readable from a distance
+- **Vibration Feedback**: Optional haptic feedback during flashing (especially in Strong Signal Mode)
+- **Sound Feedback**: Optional audio beeps or chimes with each flash
+- **Brightness Boost**: Automatically maximizes screen brightness during signal
 
-### Multilingual Support
-- **Language Options**: English, Spanish, French, Mandarin, Arabic
-- **Auto-Detection**: Automatically detects device language
-- **Easy Switching**: In-app language selector
-- **Localized Content**: All UI elements and messages translated
+### Personalization
+- **Custom Bus Number**: Enter your bus number to display instead of animated text
+- **Strong Signal Mode**: Toggle for enhanced visibility (larger fonts, bolder text)
+- **Settings Persistence**: Preferences saved between sessions
 
 ## App Structure
 
 ### Screens
 
-1. **Home Screen**
-   - Main beacon activation button
-   - Current location display
-   - Nearby bus routes
-   - Settings access
+1. **Main Screen**
+   - Title: "BusBeacon"
+   - Three main buttons:
+     - **Pick Me Up** (green) - Starts green flashing signal
+     - **Not This Bus** (red) - Starts red flashing signal
+     - **Settings** (gray) - Opens settings screen
+   - Optional bus icon/image
 
-2. **Beacon Active Screen**
-   - Full-screen visual beacon with flashing colors
-   - Cancel/stop button
-   - Timer showing beacon duration
-   - Battery status indicator
+2. **Pick Me Up Screen**
+   - Full-screen flashing display
+   - Green background alternating with white
+   - Text cycles: "PICK" → "ME" → "UP" (or shows bus number)
+   - Font size: 48px (portrait) or 64px (landscape)
+   - Strong Signal Mode: +8px font boost, bold text
+   - Tap anywhere to stop and return to main screen
 
-3. **Settings Screen**
-   - Language selection
-   - Accessibility options
-   - Beacon preferences (visual/audio/both)
-   - Location permissions
-   - Notification settings
+3. **Not This Bus Screen**
+   - Full-screen flashing display
+   - Red background alternating with white
+   - Text: "NOT THIS BUS"
+   - Font size: 48px (portrait) or 64px (landscape)
+   - Strong Signal Mode: +8px font boost, bold text
+   - Tap anywhere to stop and return to main screen
 
-4. **Help Screen**
-   - Tutorial for first-time users
-   - FAQ section
-   - Contact support
-   - Privacy policy
+4. **Settings Screen**
+   - Toggle: Strong Signal Mode (on/off)
+   - Text Input: Bus Number (optional)
+   - Save button to apply settings
+   - Returns to main screen after save
+
+5. **Stopped Screen** (Optional)
+   - Confirmation screen shown after tapping to stop
+   - Returns to main screen
 
 ## Technical Requirements
 
 ### Platform
 - Built with Thunkable X
 - iOS 12.0+ and Android 6.0+ support
-- Responsive design for tablets and phones
+- Responsive design for portrait and landscape orientations
 
-### Permissions Required
-- Location Services (for nearby stop detection)
-- Notifications (for beacon alerts)
-- Camera Flash (optional, for additional beacon visibility)
+### Global Variables
+- `busNumber` (text): User's custom bus number (empty by default)
+- `strongSignalMode` (boolean): Enhanced visibility toggle (false by default)
+- `isFlashing` (boolean): Current flashing state
+- `flashStep` (number): Current step in animation cycle (for PICK→ME→UP)
+- `isGreen` (boolean): Current background color state (for alternating)
+
+### Timers
+- `flashTimer`: 500ms interval for flashing animation
+- `notThisTimer`: 500ms interval for "Not This Bus" flashing
 
 ### Data Storage
-- Local storage for user preferences
-- No personal data collected
-- Privacy-first design
+- Local storage for user preferences (bus number, strong signal mode)
+- Settings persist between app sessions
+- No personal data collected or transmitted
 
 ## Installation
 
 1. Open Thunkable X at https://x.thunkable.com
-2. Import this project or create a new project
-3. Follow the implementation guide in [DESIGN.md](DESIGN.md)
+2. Create a new project named "BusBeacon"
+3. Follow the 15-step build plan in [DESIGN.md](DESIGN.md)
 4. Test on Thunkable Live app
 5. Publish to iOS App Store and Google Play Store
 
 ## Usage
 
 1. Open the BusBeacon app
-2. Grant location permissions when prompted
-3. The app shows your current location and nearby bus stops
-4. Press the large "Activate Beacon" button when you see your bus approaching
-5. Your screen will flash with high-visibility colors
-6. Optional audio alert will sound
-7. Press "Stop Beacon" when the bus stops for you
+2. **(Optional)** Tap "Settings" to:
+   - Enter your bus number (e.g., "42A")
+   - Enable Strong Signal Mode for enhanced visibility
+   - Tap "Save" to apply
+3. When you want a bus to pick you up:
+   - Tap "Pick Me Up" (green button)
+   - Full-screen green flashing begins
+   - If bus number is set, it displays; otherwise shows "PICK → ME → UP"
+   - Tap anywhere on screen to stop
+4. When you want to signal you're waiting for a different bus:
+   - Tap "Not This Bus" (red button)
+   - Full-screen red flashing begins with "NOT THIS BUS" message
+   - Tap anywhere on screen to stop
 
 ## Development
 
-See [DESIGN.md](DESIGN.md) for detailed screen designs, component specifications, and implementation instructions.
+See [DESIGN.md](DESIGN.md) for the complete 15-step build plan with detailed implementation instructions.
 
 ## Contributing
 
@@ -112,7 +133,9 @@ For questions or issues, please open an issue on GitHub or contact support throu
 ## Version History
 
 - v1.0.0 (Initial Release)
-  - Basic beacon functionality
-  - Multilingual support (5 languages)
-  - Accessibility features
-  - Location-based bus stop detection
+  - Pick Me Up flashing signal (green)
+  - Not This Bus flashing signal (red)
+  - Custom bus number display
+  - Strong Signal Mode for enhanced visibility
+  - Landscape orientation support
+  - Optional vibration and sound feedback
