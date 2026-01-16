@@ -32,6 +32,15 @@ export const SettingsProvider = ({ children }) => {
     localStorage.setItem('language', settings.language);
   }, [settings.language, i18n]);
 
+  // Cleanup AudioContext on unmount
+  useEffect(() => {
+    return () => {
+      if (audioContextRef.current) {
+        audioContextRef.current.close();
+      }
+    };
+  }, []);
+
   const updateSetting = (key, value) => {
     setSettings(prev => ({ ...prev, [key]: value }));
   };
