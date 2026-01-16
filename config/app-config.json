@@ -1,0 +1,200 @@
+{
+  "app": {
+    "name": "BusBeacon",
+    "version": "1.0.0",
+    "build": "2026.01.16",
+    "description": "Signal bus drivers with flashing visual cues - Pick Me Up or Not This Bus",
+    "author": "BusBeacon Team",
+    "license": "MIT",
+    "repository": "https://github.com/izzyinnis-star/Bestbusbeacon"
+  },
+  "platform": {
+    "thunkable": {
+      "type": "Thunkable X",
+      "minimumVersion": "480"
+    },
+    "ios": {
+      "minimumVersion": "12.0",
+      "targetVersion": "17.0",
+      "bundleId": "com.busbeacon.app"
+    },
+    "android": {
+      "minimumSdk": 23,
+      "targetSdk": 34,
+      "packageName": "com.busbeacon.app"
+    }
+  },
+  "permissions": {
+    "vibration": {
+      "required": false,
+      "description": "Optional haptic feedback during flashing (Strong Signal Mode)",
+      "android": "VIBRATE"
+    }
+  },
+  "features": {
+    "pickMeUp": {
+      "flashInterval": 500,
+      "colors": {
+        "primary": "#4CAF50",
+        "secondary": "#FFFFFF"
+      },
+      "textCycle": ["PICK", "ME", "UP"]
+    },
+    "notThisBus": {
+      "flashInterval": 500,
+      "colors": {
+        "primary": "#F44336",
+        "secondary": "#FFFFFF"
+      },
+      "text": "NOT THIS BUS"
+    },
+    "strongSignalMode": {
+      "fontSizeBoost": 8,
+      "fontWeight": "Bold",
+      "vibrationEnabled": true
+    },
+    "fontSizes": {
+      "portrait": {
+        "normal": 48,
+        "strong": 56
+      },
+      "landscape": {
+        "normal": 64,
+        "strong": 72
+      }
+    }
+  },
+  "colors": {
+    "green": "#4CAF50",
+    "red": "#F44336",
+    "white": "#FFFFFF",
+    "gray": "#9E9E9E",
+    "blue": "#2196F3"
+  },
+  "typography": {
+    "fontFamily": "System",
+    "sizes": {
+      "title": 32,
+      "button": 24,
+      "settings": 20,
+      "settingsLabel": 18,
+      "flashingPortrait": 48,
+      "flashingPortraitStrong": 56,
+      "flashingLandscape": 64,
+      "flashingLandscapeStrong": 72
+    },
+    "weights": {
+      "bold": "bold",
+      "normal": "normal"
+    }
+  },
+  "storage": {
+    "localDB": {
+      "keys": {
+        "busNumber": "busNumber",
+        "strongSignalMode": "strongSignalMode",
+        "soundEnabled": "soundEnabled"
+      }
+    }
+  },
+  "screens": [
+    {
+      "name": "MainScreen",
+      "route": "/",
+      "description": "Main landing screen with three action buttons"
+    },
+    {
+      "name": "PickMeUpScreen",
+      "route": "/pick-me-up",
+      "description": "Green flashing signal with PICK → ME → UP animation"
+    },
+    {
+      "name": "NotThisBusScreen",
+      "route": "/not-this-bus",
+      "description": "Red flashing signal with NOT THIS BUS text"
+    },
+    {
+      "name": "SettingsScreen",
+      "route": "/settings",
+      "description": "Settings for bus number and strong signal mode"
+    },
+    {
+      "name": "StoppedScreen",
+      "route": "/stopped",
+      "description": "Optional confirmation screen after stopping signal",
+      "optional": true
+    }
+  ],
+  "globalVariables": {
+    "busNumber": {
+      "type": "string",
+      "default": "",
+      "description": "User's custom bus number"
+    },
+    "strongSignalMode": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enhanced visibility mode toggle"
+    },
+    "isFlashing": {
+      "type": "boolean",
+      "default": false,
+      "description": "Current flashing state"
+    },
+    "flashStep": {
+      "type": "number",
+      "default": 0,
+      "description": "Animation step for PICK→ME→UP (0, 1, or 2)"
+    },
+    "isGreen": {
+      "type": "boolean",
+      "default": true,
+      "description": "Color state for alternating backgrounds"
+    },
+    "savedBrightness": {
+      "type": "number",
+      "default": 0.5,
+      "description": "Original brightness level before boost"
+    },
+    "soundEnabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Sound feedback toggle (optional feature)"
+    }
+  },
+  "assets": {
+    "sounds": [
+      {
+        "name": "beep.mp3",
+        "description": "Short beep sound for flash feedback",
+        "duration": 200,
+        "loop": false
+      }
+    ],
+    "images": [
+      {
+        "name": "app_icon.png",
+        "size": "1024x1024",
+        "description": "App icon"
+      },
+      {
+        "name": "splash_screen.png",
+        "size": "2048x2048",
+        "description": "Splash screen image"
+      },
+      {
+        "name": "bus_icon.png",
+        "size": "120x120",
+        "description": "Optional bus icon for main screen",
+        "optional": true
+      }
+    ]
+  },
+  "analytics": {
+    "enabled": false,
+    "note": "Privacy-first - no user tracking"
+  },
+  "thirdPartyServices": {
+    "none": "No third-party services or APIs used in v1.0"
+  }
+}
