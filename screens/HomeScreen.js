@@ -54,21 +54,24 @@ export default function HomeScreen({ navigation }) {
     if (!soundEnabled) return;
 
     try {
-      // Note: In a production app, you would include an actual audio file
-      // For now, we'll use expo-av's built-in capabilities
-      const { sound } = await Audio.Sound.createAsync(
-        require('../assets/chime.mp3'),
-        { shouldPlay: true }
-      );
-      soundObject.current = sound;
+      // Audio file not included in repository
+      // To enable sound: Add a chime.mp3 file to the assets directory
+      // and uncomment the following lines:
       
-      sound.setOnPlaybackStatusUpdate((status) => {
-        if (status.didJustFinish) {
-          sound.unloadAsync();
-        }
-      });
+      // const { sound } = await Audio.Sound.createAsync(
+      //   require('../assets/chime.mp3'),
+      //   { shouldPlay: true }
+      // );
+      // soundObject.current = sound;
+      // 
+      // sound.setOnPlaybackStatusUpdate((status) => {
+      //   if (status.didJustFinish) {
+      //     sound.unloadAsync();
+      //   }
+      // });
+      
+      console.log('Sound would play here (add chime.mp3 to enable)');
     } catch (error) {
-      // Gracefully handle missing audio file
       console.log('Audio not available:', error.message);
     }
   };
@@ -177,7 +180,7 @@ const getStyles = (highContrast) =>
     signalButtonText: {
       fontSize: 28,
       fontWeight: 'bold',
-      color: highContrast ? '#000000' : '#000000',
+      color: '#000000',
     },
     settingsButton: {
       paddingVertical: 15,

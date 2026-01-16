@@ -28,18 +28,23 @@ export default function SettingsScreen({ navigation }) {
     // Play sound
     if (soundEnabled) {
       try {
-        const { sound } = await Audio.Sound.createAsync(
-          require('../assets/chime.mp3'),
-          { shouldPlay: true }
-        );
+        // Audio file not included in repository
+        // To enable sound: Add a chime.mp3 file to the assets directory
+        // and uncomment the following lines:
         
-        sound.setOnPlaybackStatusUpdate((status) => {
-          if (status.didJustFinish) {
-            sound.unloadAsync();
-          }
-        });
+        // const { sound } = await Audio.Sound.createAsync(
+        //   require('../assets/chime.mp3'),
+        //   { shouldPlay: true }
+        // );
+        // 
+        // sound.setOnPlaybackStatusUpdate((status) => {
+        //   if (status.didJustFinish) {
+        //     sound.unloadAsync();
+        //   }
+        // });
+        
+        console.log('Sound would play here (add chime.mp3 to enable)');
       } catch (error) {
-        // Gracefully handle missing audio file
         console.log('Audio not available:', error.message);
       }
     }
