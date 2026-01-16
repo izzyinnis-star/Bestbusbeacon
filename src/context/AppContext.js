@@ -34,7 +34,9 @@ export const AppProvider = ({children}) => {
   // Load settings from storage on app start
   useEffect(() => {
     loadSettings();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   const loadSettings = async () => {
     try {

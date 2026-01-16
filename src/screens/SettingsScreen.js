@@ -13,6 +13,58 @@ import {useAppContext} from '../context/AppContext';
 import {getTheme, translations} from '../utils/theme';
 import {vibrate} from '../utils/sound';
 
+// Helper component for setting rows
+const SettingRow = ({label, children, theme}) => (
+  <View style={[styles.settingRow, {borderBottomColor: theme.borderColor}]}>
+    <Text style={[styles.settingLabel, {color: theme.textColor}]}>{label}</Text>
+    {children}
+  </View>
+);
+
+// Helper component for toggle buttons
+const ToggleButton = ({value, onValueChange, label, theme, highContrast, t}) => (
+  <View style={styles.toggleContainer}>
+    <Text style={[styles.toggleLabel, {color: theme.textColor}]}>
+      {value ? t.on : t.off}
+    </Text>
+    <Switch
+      value={value}
+      onValueChange={onValueChange}
+      trackColor={{
+        false: theme.disabledColor,
+        true: highContrast ? theme.buttonBackground : '#34C759',
+      }}
+      thumbColor={highContrast ? theme.buttonText : '#FFFFFF'}
+    />
+  </View>
+);
+
+// Helper component for language buttons
+const LanguageButton = ({langCode, langLabel, language, theme, onPress}) => (
+  <TouchableOpacity
+    style={[
+      styles.languageButton,
+      {
+        backgroundColor:
+          language === langCode ? theme.buttonBackground : 'transparent',
+        borderColor: theme.borderColor,
+      },
+    ]}
+    onPress={onPress}
+    activeOpacity={0.8}>
+    <Text
+      style={[
+        styles.languageButtonText,
+        {
+          color:
+            language === langCode ? theme.buttonText : theme.textColor,
+        },
+      ]}>
+      {langLabel}
+    </Text>
+  </TouchableOpacity>
+);
+
 const SettingsScreen = ({navigation}) => {
   const {
     language,
@@ -49,57 +101,6 @@ const SettingsScreen = ({navigation}) => {
     setLanguage(newLanguage);
   };
 
-  const SettingRow = ({label, children}) => (
-    <View style={[styles.settingRow, {borderBottomColor: theme.borderColor}]}>
-      <Text style={[styles.settingLabel, {color: theme.textColor}]}>{label}</Text>
-      {children}
-    </View>
-  );
-
-  const ToggleButton = ({value, onValueChange, label}) => (
-    <View style={styles.toggleContainer}>
-      <Text style={[styles.toggleLabel, {color: theme.textColor}]}>
-        {value ? t.on : t.off}
-      </Text>
-      <Switch
-        value={value}
-        onValueChange={(val) => handleToggle(onValueChange, val)}
-        trackColor={{
-          false: theme.disabledColor,
-          true: highContrast ? theme.buttonBackground : '#34C759',
-        }}
-        thumbColor={highContrast ? theme.buttonText : '#FFFFFF'}
-      />
-    </View>
-  );
-
-  const LanguageButton = ({langCode, langLabel}) => (
-    <TouchableOpacity
-      style={[
-        styles.languageButton,
-        {
-          backgroundColor:
-            language === langCode ? theme.buttonBackground : 'transparent',
-          borderColor: theme.borderColor,
-        },
-      ]}
-      onPress={() => handleLanguageChange(langCode)}
-      activeOpacity={0.8}>
-      <Text
-        style={[
-          styles.languageButtonText,
-          {
-            color:
-              language === langCode
-                ? theme.buttonText
-                : theme.textColor,
-          },
-        ]}>
-        {langLabel}
-      </Text>
-    </TouchableOpacity>
-  );
-
   return (
     <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor}]}>
       <StatusBar
@@ -115,38 +116,65 @@ const SettingsScreen = ({navigation}) => {
         </View>
 
         {/* Language Setting */}
-        <SettingRow label={t.language}>
+        <SettingRow label={t.language} theme={theme}>
           <View style={styles.languageOptions}>
-            <LanguageButton langCode="en" langLabel={t.english} />
-            <LanguageButton langCode="es" langLabel={t.spanish} />
-            <LanguageButton langCode="fr" langLabel={t.french} />
+            <LanguageButton
+              langCode="en"
+              langLabel={t.english}
+              language={language}
+              theme={theme}
+              onPress={() => handleLanguageChange('en')}
+            />
+            <LanguageButton
+              langCode="es"
+              langLabel={t.spanish}
+              language={language}
+              theme={theme}
+              onPress={() => handleLanguageChange('es')}
+            />
+            <LanguageButton
+              langCode="fr"
+              langLabel={t.french}
+              language={language}
+              theme={theme}
+              onPress={() => handleLanguageChange('fr')}
+            />
           </View>
         </SettingRow>
 
         {/* High Contrast Mode */}
-        <SettingRow label={t.highContrastMode}>
+        <SettingRow label={t.highContrastMode} theme={theme}>
           <ToggleButton
             value={highContrast}
-            onValueChange={setHighContrast}
+            onValueChange={(val) => handleToggle(setHighContrast, val)}
             label={highContrast ? t.on : t.off}
+            theme={theme}
+            highContrast={highContrast}
+            t={t}
           />
         </SettingRow>
 
         {/* Sound Setting */}
-        <SettingRow label={t.soundEnabled}>
+        <SettingRow label={t.soundEnabled} theme={theme}>
           <ToggleButton
             value={soundEnabled}
-            onValueChange={setSoundEnabled}
+            onValueChange={(val) => handleToggle(setSoundEnabled, val)}
             label={soundEnabled ? t.on : t.off}
+            theme={theme}
+            highContrast={highContrast}
+            t={t}
           />
         </SettingRow>
 
         {/* Vibration Setting */}
-        <SettingRow label={t.vibrationEnabled}>
+        <SettingRow label={t.vibrationEnabled} theme={theme}>
           <ToggleButton
             value={vibrationEnabled}
-            onValueChange={setVibrationEnabled}
+            onValueChange={(val) => handleToggle(setVibrationEnabled, val)}
             label={vibrationEnabled ? t.on : t.off}
+            theme={theme}
+            highContrast={highContrast}
+            t={t}
           />
         </SettingRow>
 
