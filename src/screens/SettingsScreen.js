@@ -238,7 +238,6 @@ const styles = StyleSheet.create({
   languageOptions: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 10,
     marginTop: 8,
   },
   languageButton: {
@@ -247,6 +246,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 2,
     minWidth: 100,
+    marginRight: 10,
+    marginBottom: 10,
   },
   languageButtonText: {
     fontSize: 16,

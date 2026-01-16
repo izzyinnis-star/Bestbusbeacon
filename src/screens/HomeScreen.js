@@ -11,6 +11,14 @@ import {useAppContext} from '../context/AppContext';
 import {getTheme, translations} from '../utils/theme';
 import {playChime, vibrate} from '../utils/sound';
 
+// Helper function to get signal button text color
+const getSignalButtonTextColor = (highContrast, isSignaling, theme) => {
+  if (highContrast) {
+    return theme.buttonText;
+  }
+  return isSignaling ? '#000000' : '#FFFFFF';
+};
+
 const HomeScreen = ({navigation}) => {
   const {
     isSignaling,
@@ -82,11 +90,7 @@ const HomeScreen = ({navigation}) => {
             style={[
               styles.signalButtonText,
               {
-                color: highContrast
-                  ? theme.buttonText
-                  : isSignaling
-                  ? '#000000'
-                  : '#FFFFFF',
+                color: getSignalButtonTextColor(highContrast, isSignaling, theme),
               },
             ]}>
             {isSignaling ? t.stopSignal : t.signalButton}

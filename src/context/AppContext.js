@@ -37,7 +37,6 @@ export const AppProvider = ({children}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
   const loadSettings = async () => {
     try {
       const [
@@ -53,9 +52,27 @@ export const AppProvider = ({children}) => {
       ]);
 
       if (storedLanguage !== null) setLanguage(storedLanguage);
-      if (storedHighContrast !== null) setHighContrast(JSON.parse(storedHighContrast));
-      if (storedSoundEnabled !== null) setSoundEnabled(JSON.parse(storedSoundEnabled));
-      if (storedVibrationEnabled !== null) setVibrationEnabled(JSON.parse(storedVibrationEnabled));
+      if (storedHighContrast !== null) {
+        try {
+          setHighContrast(JSON.parse(storedHighContrast));
+        } catch {
+          setHighContrast(false);
+        }
+      }
+      if (storedSoundEnabled !== null) {
+        try {
+          setSoundEnabled(JSON.parse(storedSoundEnabled));
+        } catch {
+          setSoundEnabled(true);
+        }
+      }
+      if (storedVibrationEnabled !== null) {
+        try {
+          setVibrationEnabled(JSON.parse(storedVibrationEnabled));
+        } catch {
+          setVibrationEnabled(true);
+        }
+      }
     } catch (error) {
       console.error('Error loading settings:', error);
     } finally {
