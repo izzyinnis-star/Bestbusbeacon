@@ -30,8 +30,12 @@ function initializeApp() {
     languageManager.updatePageText();
     updateLanguageButtons(newLanguage);
     
-    // Sync with settings manager
-    settingsManager.setSetting('language', newLanguage);
+    // Sync with settings manager (but don't trigger if it's already the same)
+    if (settingsManager.getSetting('language') !== newLanguage) {
+      // Temporarily store the old value to prevent circular updates
+      settingsManager.settings.language = newLanguage;
+      settingsManager.saveSettings();
+    }
   });
   
   // Listen for setting changes
