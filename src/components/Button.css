@@ -1,0 +1,106 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  border: 2px solid transparent;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  text-decoration: none;
+  min-height: 60px;
+  min-width: 200px;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button:not(:disabled):active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Button Variants */
+.button-primary {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary-dark);
+}
+
+.button-primary:not(:disabled):hover {
+  background-color: var(--color-primary-dark);
+}
+
+.button-secondary {
+  background-color: var(--color-secondary);
+  color: white;
+  border-color: #cc5200;
+}
+
+.button-secondary:not(:disabled):hover {
+  background-color: #cc5200;
+}
+
+.button-success {
+  background-color: var(--color-success);
+  color: white;
+  border-color: #218838;
+}
+
+.button-success:not(:disabled):hover {
+  background-color: #218838;
+}
+
+.button-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.button-outline:not(:disabled):hover {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+/* Button Sizes */
+.button-large {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-lg);
+  min-height: 60px;
+}
+
+.button-medium {
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-base);
+  min-height: 48px;
+  min-width: 150px;
+}
+
+.button-small {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-base);
+  min-height: 40px;
+  min-width: 100px;
+}
+
+/* Button Icon */
+.button-icon {
+  font-size: 1.2em;
+  display: inline-flex;
+  align-items: center;
+}
+
+.button-text {
+  display: inline-flex;
+  align-items: center;
+}

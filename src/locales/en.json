@@ -1,0 +1,22 @@
+{
+  "appName": "Best Bus Beacon",
+  "home": "Home",
+  "settings": "Settings",
+  "language": "Language",
+  "english": "English",
+  "french": "French",
+  "vibrationFeedback": "Vibration Feedback",
+  "soundFeedback": "Sound Feedback",
+  "highContrast": "High Contrast Mode",
+  "saveSettings": "Save Settings",
+  "settingsSaved": "Settings saved successfully!",
+  "welcome": "Welcome to Best Bus Beacon",
+  "welcomeMessage": "Your accessible transit tracking companion",
+  "viewBuses": "View Bus Arrivals",
+  "nearbyStops": "Nearby Stops",
+  "favorites": "Favorites",
+  "about": "About",
+  "accessibility": "Accessibility",
+  "accessibilityMessage": "This app is designed with accessibility in mind. Large buttons, high contrast, and clear labels throughout.",
+  "languageChanged": "Language changed successfully"
+}
