@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Best Bus Beacon - Multilingual Demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="normal-contrast">
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <h1 data-translate="welcomeMessage">Welcome to Best Bus Beacon</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Bus Tracking Section -->
+      <section class="bus-tracking">
+        <h2 data-translate="trackBus">Track Bus</h2>
+        
+        <div class="form-group">
+          <label data-translate="selectRoute">Select Route</label>
+          <select id="routeSelect">
+            <option value="1">Route 1</option>
+            <option value="2">Route 2</option>
+            <option value="3">Route 3</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label data-translate="selectStop">Select Stop</label>
+          <select id="stopSelect">
+            <option value="A">Stop A</option>
+            <option value="B">Stop B</option>
+            <option value="C">Stop C</option>
+          </select>
+        </div>
+
+        <div class="button-group">
+          <button id="signalBusBtn" class="btn btn-primary" data-translate="signalBus">Signal Bus</button>
+          <button id="trackBusBtn" class="btn btn-secondary" data-translate="trackBus">Track Bus</button>
+          <button id="refreshBtn" class="btn btn-secondary" data-translate="refresh">Refresh</button>
+        </div>
+      </section>
+
+      <!-- Status Section -->
+      <section class="status-section">
+        <h2 data-translate="busArriving">Bus Arriving</h2>
+        <div class="status-card">
+          <div class="status-item">
+            <span class="label" data-translate="busNumber">Bus Number</span>
+            <span class="value">42</span>
+          </div>
+          <div class="status-item">
+            <span class="label" data-translate="route">Route</span>
+            <span class="value">Downtown Express</span>
+          </div>
+          <div class="status-item">
+            <span class="label" data-translate="arrivalTime">Arrival Time</span>
+            <span class="value">5 <span data-translate="minutes">minutes</span></span>
+          </div>
+          <div class="status-item">
+            <span class="label" data-translate="busOnTime">Status</span>
+            <span class="value status-success" data-translate="busOnTime">Bus On Time</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings Section -->
+      <section class="settings-section">
+        <h2 data-translate="settings">Settings</h2>
+        
+        <div class="settings-group">
+          <div class="setting-item">
+            <label>
+              <span data-translate="language">Language</span>
+              <div class="language-toggle">
+                <button id="langEN" class="lang-btn active">EN</button>
+                <button id="langFR" class="lang-btn">FR</button>
+              </div>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <label>
+              <span data-translate="highContrast">High Contrast Mode</span>
+              <input type="checkbox" id="highContrastToggle" class="toggle">
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <label>
+              <span data-translate="darkMode">Dark Mode</span>
+              <input type="checkbox" id="darkModeToggle" class="toggle">
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <label>
+              <span data-translate="notifications">Notifications</span>
+              <input type="checkbox" id="notificationsToggle" class="toggle" checked>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <label>
+              <span data-translate="autoRefresh">Auto Refresh</span>
+              <input type="checkbox" id="autoRefreshToggle" class="toggle" checked>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <label>
+              <span data-translate="fontSize">Font Size</span>
+              <select id="fontSizeSelect">
+                <option value="small">Small</option>
+                <option value="medium" selected>Medium</option>
+                <option value="large">Large</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button id="saveBtn" class="btn btn-primary" data-translate="save">Save</button>
+          <button id="cancelBtn" class="btn btn-secondary" data-translate="cancel">Cancel</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        <span data-translate="version">Version</span>: 1.0.0 |
+        <span data-translate="serviceActive">Service Active</span>
+      </p>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="translations.js"></script>
+  <script src="languageManager.js"></script>
+  <script src="settingsManager.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
