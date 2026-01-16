@@ -11,6 +11,7 @@ const translations = {
     sound: 'Sound',
     vibration: 'Vibration',
     testFeedback: 'Test Feedback',
+    testPickMeUp: 'Test Pick Me Up',
     back: 'Back',
   },
   fr: {
@@ -25,6 +26,7 @@ const translations = {
     sound: 'Son',
     vibration: 'Vibration',
     testFeedback: 'Tester les Retours',
+    testPickMeUp: 'Tester Pick Me Up',
     back: 'Retour',
   },
 };

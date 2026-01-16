@@ -17,6 +17,13 @@ export const SettingsProvider = ({ children }) => {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [vibrationEnabled, setVibrationEnabled] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  
+  // Global variables for BusBeacon flashing system
+  const [busNumber, setBusNumber] = useState('');
+  const [strongSignalMode, setStrongSignalMode] = useState(false);
+  const [isFlashing, setIsFlashing] = useState(false);
+  const [flashStep, setFlashStep] = useState(1);
+  const [isGreen, setIsGreen] = useState(true);
 
   useEffect(() => {
     loadSettings();
@@ -88,6 +95,17 @@ export const SettingsProvider = ({ children }) => {
         saveHighContrast,
         saveSoundEnabled,
         saveVibrationEnabled,
+        // Global variables for BusBeacon flashing system
+        busNumber,
+        setBusNumber,
+        strongSignalMode,
+        setStrongSignalMode,
+        isFlashing,
+        setIsFlashing,
+        flashStep,
+        setFlashStep,
+        isGreen,
+        setIsGreen,
       }}
     >
       {children}

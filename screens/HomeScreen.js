@@ -131,6 +131,15 @@ export default function HomeScreen({ navigation }) {
             {getTranslation(language, 'settings')}
           </Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.pickMeUpButton}
+          onPress={() => navigation.navigate('PickMeUp')}
+        >
+          <Text style={styles.pickMeUpButtonText}>
+            {getTranslation(language, 'testPickMeUp')}
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -187,8 +196,20 @@ const getStyles = (highContrast) =>
       paddingHorizontal: 40,
       borderRadius: 10,
       backgroundColor: highContrast ? '#FFFFFF' : '#2196F3',
+      marginBottom: 15,
     },
     settingsButtonText: {
+      fontSize: 18,
+      fontWeight: '600',
+      color: highContrast ? '#000000' : '#FFFFFF',
+    },
+    pickMeUpButton: {
+      paddingVertical: 15,
+      paddingHorizontal: 40,
+      borderRadius: 10,
+      backgroundColor: highContrast ? '#FFFFFF' : '#FF6B35',
+    },
+    pickMeUpButtonText: {
       fontSize: 18,
       fontWeight: '600',
       color: highContrast ? '#000000' : '#FFFFFF',
