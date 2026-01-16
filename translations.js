@@ -48,6 +48,7 @@ const translations = {
     arrivalTime: "Arrival Time",
     busNumber: "Bus Number",
     route: "Route",
+    status: "Status",
     destination: "Destination",
     minutes: "minutes",
     seconds: "seconds"
@@ -99,6 +100,7 @@ const translations = {
     arrivalTime: "Heure d'arrivée",
     busNumber: "Numéro d'autobus",
     route: "Itinéraire",
+    status: "État",
     destination: "Destination",
     minutes: "minutes",
     seconds: "secondes"
