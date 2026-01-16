@@ -10,6 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
  * Initialize the application
  */
 function initializeApp() {
+  // Set up dependency injection: settings manager calls language manager when language changes
+  settingsManager.setLanguageChangeHandler(function(language) {
+    languageManager.setLanguage(language);
+  });
+  
   // Load stored settings and apply them
   settingsManager.applyAllSettings();
   
@@ -30,11 +35,9 @@ function initializeApp() {
     languageManager.updatePageText();
     updateLanguageButtons(newLanguage);
     
-    // Sync with settings manager (but don't trigger if it's already the same)
+    // Sync with settings manager using skipApply to prevent circular calls
     if (settingsManager.getSetting('language') !== newLanguage) {
-      // Temporarily store the old value to prevent circular updates
-      settingsManager.settings.language = newLanguage;
-      settingsManager.saveSettings();
+      settingsManager.setSetting('language', newLanguage, { skipApply: true });
     }
   });
   

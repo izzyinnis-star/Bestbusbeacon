@@ -16,6 +16,7 @@ class SettingsManager {
     
     this.loadSettings();
     this.listeners = {};
+    this.languageChangeHandler = null; // External handler for language changes
   }
   
   /**
@@ -60,8 +61,9 @@ class SettingsManager {
    * Set a setting value and store it
    * @param {string} key - Setting key
    * @param {*} value - Setting value
+   * @param {Object} options - Optional settings like {skipApply: boolean}
    */
-  setSetting(key, value) {
+  setSetting(key, value, options = {}) {
     const oldValue = this.settings[key];
     this.settings[key] = value;
     this.saveSettings();
@@ -69,8 +71,10 @@ class SettingsManager {
     // Notify listeners
     this.notifyListeners(key, value, oldValue);
     
-    // Apply setting immediately
-    this.applySetting(key, value);
+    // Apply setting immediately unless skipApply is true
+    if (!options.skipApply) {
+      this.applySetting(key, value);
+    }
   }
   
   /**
@@ -102,9 +106,10 @@ class SettingsManager {
         this.applyFontSize(value);
         break;
       case 'language':
-        // Language changes are handled by LanguageManager
-        if (typeof languageManager !== 'undefined') {
-          languageManager.setLanguage(value);
+        // Language changes are delegated to external handler if available
+        // This allows decoupling - the app.js sets up the connection
+        if (this.languageChangeHandler) {
+          this.languageChangeHandler(value);
         }
         break;
     }
@@ -222,6 +227,14 @@ class SettingsManager {
     };
     this.saveSettings();
     this.applyAllSettings();
+  }
+  
+  /**
+   * Set external handler for language changes (dependency injection)
+   * @param {Function} handler - Function to call when language setting changes
+   */
+  setLanguageChangeHandler(handler) {
+    this.languageChangeHandler = handler;
   }
 }
 
