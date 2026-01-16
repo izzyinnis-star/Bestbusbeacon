@@ -33,7 +33,7 @@
     },
     "notifications": {
       "required": false,
-      "description": "Notify when beacon is active",
+      "description": "Send notifications when beacon is active",
       "ios": "NSUserNotificationsUsageDescription",
       "android": "POST_NOTIFICATIONS"
     },

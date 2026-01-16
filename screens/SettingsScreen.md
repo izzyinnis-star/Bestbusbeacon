@@ -45,7 +45,7 @@ Configuration screen for app preferences, beacon settings, accessibility options
 - **Screen Reader Toggle**
   - Label: "Screen Reader Support"
   - Description: "Enhanced VoiceOver/TalkBack"
-  - Default: AUTO (device setting)
+  - Default: AUTO (device settings)
 - **Text Size Slider**
   - Label: "Text Size"
   - Range: 75% to 150%
